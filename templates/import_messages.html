@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1 style="text-align: center;">Import Messages to Classify | Sınıflandırmak için Mesaj Dosyası Yükle</h1>
+    <form action="/import-messages" method="POST" enctype="multipart/form-data">
+        <label for="csv-file">Select a CSV file:</label>
+        <input type="file" id="csv-file" name="file" accept=".csv" required>
+        <br>
+        <label for="classifier">Select a classifier:</label>
+        <select id="classifier" name="classifier">
+            {% for classifier in classifiers %}
+                <option value="{{ classifier }}"
+                    {% if classifier == selected_classifier %}
+                        selected
+                    {% endif %}
+                >{{ classifier }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Import Messages</button>
+    </form>
+    <a href="/">Go back to home</a>
+</body>
+</html>

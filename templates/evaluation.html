@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Performance Evaluation of Classifiers | Sınıflandırcının Performansının Ölçümü</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* CSS styling for the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h2>Performance Evaluation of Classifiers | Sınıflandırcının Performansının Ölçümü</h2>
+
+    <form action="/evaluation" method="POST">
+        <label for="classifier">Select Classifier | Sınıflandırıcı Seç:</label>
+        <select name="classifier" id="classifier">
+            {% for classifier_name in classifiers.keys() %}
+                <option value="{{ classifier_name }}" {% if selected_classifier == classifier_name %}selected{% endif %}>{{ classifier_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Evaluate | Ölçtür</button>
+    </form>
+    
+
+    {% if selected_classifier %}
+        <h2>Performance Metrics for {{ selected_classifier }}</h2>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Accuracy</td>
+                <td>{{ accuracy }}</td>
+            </tr>
+            <tr>
+                <td>Precision</td>
+                <td>{{ precision }}</td>
+            </tr>
+            <tr>
+                <td>Recall</td>
+                <td>{{ recall }}</td>
+            </tr>
+            <tr>
+                <td>F1-Score</td>
+                <td>{{ f1 }}</td>
+            </tr>
+        </table>
+    {% endif %}
+
+    <br>
+    <a href="/">Go back to home| Anasayfaya Geri Dön</a>
+</body>
+</html>

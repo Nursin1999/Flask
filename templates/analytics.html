@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spam Classifier Analytics</title>
+</head>
+<body>
+    <h1>Spam Classifier Analytics</h1>
+    <table>
+        <tr>
+            <th>Classifier</th>
+            <th>Accuracy</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1-Score</th>
+        </tr>
+        {% for classifier, metrics in analytics.items() %}
+        <tr>
+            <td>{{ classifier }}</td>
+            <td>{{ metrics['accuracy'] }}</td>
+            <td>{{ metrics['precision'] }}</td>
+            <td>{{ metrics['recall'] }}</td>
+            <td>{{ metrics['f1_score'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Back to Home</a>
+</body>
+</html>

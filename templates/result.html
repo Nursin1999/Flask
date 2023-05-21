@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spam Classification Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .result-label {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Spam Classification Result | Spam Sınıflandırma Sonucu</h1>
+    </header>
+    <main>
+        <p class="result-label">The Entered Message is | Girilen Mesaj: {{ label }}</p>
+        {% if plot_data %}
+        <img src="data:image/png;base64,{{ plot_data }}" alt="Spam Classification Result">
+        {% endif %}
+        <p>Probability of the message being spam | Mesajın Spam Olma Olasılığı : {{ prob_spam }}%</p>
+        <p>Probability of the message being ham    | Mesajın Ham Olma Olasılığı : {{ prob_ham }}%</p>
+        <br>
+        <h2>Analytics | Analizler</h2>
+        <p>Number of messages | Girilen Mesaj Sayısı: {{ analytics['num_messages'] }}</p>
+        <p>Average message length                 | Girilen Mesaj Ortalama Uzunluğu : {{ analytics['avg_length'] }}</p>
+        <p>Top 10 most common words           | En sık kullanılan 10 kelime :</p>
+        <ul>
+        {% for word, count in analytics['common_words'] %}
+            <li>{{ word }} ({{ count }})</li>
+        {% endfor %}
+        </ul>
+        <a id="back-button" href="/">Back to Home | Anasayfaya Geri Dön</a>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

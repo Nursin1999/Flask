@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Messages | kaydedilen Mesajlar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Saved Messages | kaydedilen Mesajlar</h1>
+</header>
+<main>
+    <a href="{{ url_for('home') }}">Back to Home | Anasayfaya Geri Dön</a>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message['message'] }} - {{ message['predicted_label'] }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No messages saved yet | Henüz kaydedilen mesaj yok.</p>
+    {% endif %}
+</main>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Messages</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Saved Messages</h1>
+</header>
+<main>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message['message'] }} - {{ message['predicted_label'] }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No messages saved yet.</p>
+    {% endif %}
+</main>
+</body>
+</html>
+-->

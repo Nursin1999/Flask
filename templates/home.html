@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spam Detection App - Spam Tespit Uygulaması</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        .button-container a {
+            font-size: 14px; /* Adjust the font size to your preference */
+          }
+
+          .button-box {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+          }
+          
+          .button-box a {
+            text-decoration: none;
+          }
+          
+          .button-box a:hover {
+            background-color: #f0f0f0;
+          }
+
+          .button-box {
+            display: inline-block;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+          }
+          
+          .button-box a {
+            text-decoration: none;
+          }
+          
+          .button-box a span {
+            display: block;
+          }
+          
+          .button-box a:hover {
+            background-color: #f0f0f0;
+          }
+
+          
+    </style>
+</head>
+<body>
+<header>
+    <h1>Spam Detection App | Spam Tespit Uygulaması </h1>
+</header>
+<main>
+    <form action="{{ url_for('predict') }}" method="post">
+        <label for="message">Please Enter a Message | Lütfen Mesajı Giriniz:</label>
+        <textarea id="message" name="message" required></textarea>
+        <label for="classifier">Select a classifier | Sınıflandırıcı Seç:</label>
+        <select id="classifier" name="classifier">
+            {% for classifier in classifiers %}
+                <option value="{{ classifier }}"
+                    {% if classifier == selected_classifier %}
+                        selected
+                    {% endif %}
+                >{{ classifier }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Classify | Sınıflandır</button>
+    </form>
+    <div class="button-container">
+        <div class="button-box">
+          <a href="{{ url_for('messages') }}">
+            View Saved Messages <br>  <br>
+            <span>Kaydedilen Mesajları Görüntüle</span>
+          </a>
+        </div>
+        <div class="button-box">
+          <a id="evaluation-button" href="/evaluation">
+            Performance Evaluation of Classifiers<br>  <br>
+            <span>Sınıflandırcının Performansının Ölçümü</span>
+          </a>
+        </div>
+        <div class="button-box">
+          <a href="/import-messages">
+            Import Messages to Classify<br>  <br>
+            <span>Sınıflandırmak için Mesaj Dosyası Yükle</span>
+          </a>
+        </div>
+      </div>
+</main>
+</body>
+</html>
